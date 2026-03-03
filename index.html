@@ -8,12 +8,26 @@
         body {background-image: url("background.jpg"); background-size: cover; background-attachment: fixed;
         background-position: center;background-repeat: no-repeat; height: 100vh; margin: 0; font-family: Arial, sans-serif; text-align:center; color:white; }
         h2 { margin-top:20px; color: rgb(44, 4, 44); }
-        table { width:100%; border-collapse: collapse; margin:20px auto; background:white; color:black;
+        table { width:100%; border-collapse: separate; border-spacing: 12px; margin:20px auto; background:rgb(1, 7, 70); color:black;
         border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.2); font-size: 28px; }
-        th, td { border:1px solid #999; padding:8px 12px; cursor:pointer; }
+        th, td { border:0.5px solid #9af7db; padding:8px 12px; cursor:pointer; }
         th { background:#ddd; }
-        td:hover { background:#cce5ff; }
-        #chartContainer { width:90%; height:500px; margin:30px auto; display:none; background:white; border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.2); }
+
+        td{animation: pulseZoom 3s infinite ease-in-out;
+            color: white; padding: 12px 25px; text-align: center; font-weight: 600; border-radius: 8px; cursor: pointer;
+            transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(0, 0, 0, 0, 0.2); user-select: none;}
+            td:hover { transform: translateY(-4px); box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); 
+                    background: linear-gradient(135deg, #2e59d9, #17a673);}
+        td:active{transform: scale(0.95);}
+        #chartContainer { width:95%; align-content: center; height:500px; margin:30px auto; display:none; background:white; border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.2); }
+    
+        @keyframes pulseZoom{
+            0%{transform: scale(1);}
+            50%{transform: scale(1.08);}
+            100%{transform: scale(1);}
+        }
+        td:hover{transform: scale(1.1); box-shadow: 0 6px 12px rgba(0, 0, 0, 0, 0.3);}
+
     </style>
 </head>
 <body>
