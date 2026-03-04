@@ -1,26 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Construction Input Price Index</title>
     <script src="highcharts.js"></script>
     <style>
+
+        *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
         
         body {background-image: url("background.jpg"); background-size: cover; background-attachment: fixed;
-        background-position: center;background-repeat: no-repeat; height: 100vh; margin: 0; font-family: Arial, sans-serif; text-align:center; color:white; }
-        h2 { margin-top:20px; color: rgb(44, 4, 44); }
-        table { width:100%; border-collapse: separate; border-spacing: 12px; margin:20px auto; background:rgb(1, 7, 70); color:black;
-        border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.2); font-size: 28px; }
-        th, td { border:0.5px solid #9af7db; padding:8px 12px; cursor:pointer; }
-        th { background:#ddd; }
+        background-position: center;background-repeat: no-repeat; height: 100vh; margin: 0;
+        font-family: Arial, sans-serif; text-align:center; color:white; width: 100%;}
+        h2 {font-size: 18px; margin-top:20px; color: rgb(44, 4, 44); }
+        .table-wrapper{width: 100%; overflow-x: auto; margin-top: 0;}
+        #priceTable {margin-left: 10px; margin-right: 10px; width:100%; border-collapse: separate;
+                    border-spacing: 12px; margin:20px auto; background:rgb(1, 7, 70); color:black;
+                    border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.2); font-size: 28px; }
+        th, td { border:0.5px solid #9af7db; padding:8px 12px; cursor:pointer; text-align: center; font-size: 18px; }
+        th { background:#ddd; font-size: 29px; font-weight: bold;}
 
-        td{animation: pulseZoom 3s infinite ease-in-out;
+        td{animation: pulseZoom 3s infinite ease-in-out; font-size: 28px;
             color: white; padding: 12px 25px; text-align: center; font-weight: 600; border-radius: 8px; cursor: pointer;
             transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(0, 0, 0, 0, 0.2); user-select: none;}
             td:hover { transform: translateY(-4px); box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); 
                     background: linear-gradient(135deg, #2e59d9, #17a673);}
         td:active{transform: scale(0.95);}
-        #chartContainer { width:95%; align-content: center; height:500px; margin:30px auto; display:none; background:white; border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.2); }
+        #chartContainer { width:100%; align-content: center; height:500px; margin:0 auto;
+                        display:none; background:white; border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.2); }
     
+            .infor{color: #ffffff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 18px; text-align: center;
+                    background-color: darkblue ; padding: 10px; border-radius: 15px;
+                    margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 0;}
+
         @keyframes pulseZoom{
             0%{transform: scale(1);}
             50%{transform: scale(1.08);}
@@ -32,8 +45,10 @@
 </head>
 <body>
 
-<h2>Overall Construction Input Price Index</h2>
-
+<h1 style="font-size: 22px; text-align: center; color:#1207ad; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+    Overall Construction Input Price Index Base Period 2016/2017</h1>
+<p Class="infor">Click or Tap any <strong>Check</strong> buttons bellow to view the corresponding Price Index</p>
+<div class="table-wrapper">
 <table id="priceTable">
     <tr>
         <th>Month</th>
@@ -89,6 +104,7 @@
 </tr>
 
 </table>
+</div>
 
 <div id="chartContainer"></div>
 
