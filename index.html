@@ -41,7 +41,7 @@
         }
         td:hover{transform: scale(1.1); box-shadow: 0 6px 12px rgba(0, 0, 0, 0, 0.3);}
 
-        iframe {width: 100%; border: none; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.2);}
+        iframe {width: 100%; height: 100vh; margin-bottom: 10px; border: none; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.2);}
 
     </style>
 </head>
@@ -444,6 +444,12 @@ function updateChart(month, date){
         series:[{ data: values.map(v => ({ y:v, color: v<=100?'green':v<=140?'orange':'red' })) }]
     }, true, true);
     chart.reflow();
+
+     // === AUTO SCROLL TO CHART ===
+    document.getElementById("chartContainer").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
 }
 
 // === Dynamically create table cells ===
@@ -462,6 +468,10 @@ months.forEach(month => {
     });
 });
 
+// remove repeated months
+table.deleteRow(-1);
+table.deleteRow(-1);
+table.deleteRow(-1);
 
 </script>
 
