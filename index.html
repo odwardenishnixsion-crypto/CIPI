@@ -17,7 +17,7 @@
         .table-wrapper{width: 100%; overflow-x: auto; margin-top: 0;}
         #priceTable {margin-left: 10px; margin-right: 10px; width:100%; border-collapse: separate;
                     border-spacing: 12px; margin:20px auto; background:rgb(1, 7, 70); color:black;
-                    border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.2); font-size: 28px; }
+                    border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.2); font-size: 20px; }
         th, td { border:0.5px solid #9af7db; padding:8px 12px; cursor:pointer; text-align: center; font-size: 18px; }
         th { background:#ddd; font-size: 29px; font-weight: bold;}
 
@@ -46,13 +46,14 @@
 /* Make iframe containers responsive */
 #chart2-container,
 #chart3-container {
-    width: 100%;             /* Full width of parent */
-    max-width: 900px;        /* Max width on large screens */
+    width: 96%;             /* Full width of parent */
     margin: 30px auto;       /* Center horizontally with space above/below */
     box-shadow: 0 4px 12px rgba(0,0,0,0.3); /* Optional: subtle shadow */
-    border-radius: 12px;     /* Rounded corners */
+    border-radius: 20px;     /* Rounded corners */
     overflow: hidden;        /* Hide scrollbars */
 }
+
+#chart3-container{margin-bottom: 8px;}
 
 /* Make iframes inside responsive containers fill their parent */
 #chart2-container iframe,
@@ -267,7 +268,7 @@
 <div id="chartContainer"></div>
 
 <!-- Second Chart div -->
-<div id="chart2-container" style="width:100%; max-width:800px; margin:40px auto;">
+<div id="chart2-container"">
     <iframe 
         src="chart2.html" 
         style="width:100%; height:500px; border:0; overflow:hidden;" 
@@ -276,7 +277,7 @@
     </iframe>
 </div>
 
-<div id="chart3-container" style="width:100%; max-width:800px; margin:40px auto;">
+<div id="chart3-container">
     <iframe 
         src="lineoverall.html" 
         style="width:100%; height:500px; border:0; overflow:hidden;" 
