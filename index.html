@@ -43,6 +43,35 @@
 
         iframe {width: 100%; height: 100vh; margin-bottom: 10px; border: none; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.2);}
 
+/* Make iframe containers responsive */
+#chart2-container,
+#chart3-container {
+    width: 100%;             /* Full width of parent */
+    max-width: 900px;        /* Max width on large screens */
+    margin: 30px auto;       /* Center horizontally with space above/below */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3); /* Optional: subtle shadow */
+    border-radius: 12px;     /* Rounded corners */
+    overflow: hidden;        /* Hide scrollbars */
+}
+
+/* Make iframes inside responsive containers fill their parent */
+#chart2-container iframe,
+#chart3-container iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 400px;       /* Minimum height for mobile */
+    border: 0;               /* Remove borders */
+}
+
+/* Optional: adjust height for smaller screens */
+@media screen and (max-width: 600px) {
+    #chart2-container iframe,
+    #chart3-container iframe {
+        min-height: 300px;   /* Slightly smaller for phones */
+    }
+}
+
+
     </style>
 </head>
 <body>
@@ -238,8 +267,22 @@
 <div id="chartContainer"></div>
 
 <!-- Second Chart div -->
-<div class="card">
-    <iframe src="chart2.html" height="450"></iframe>
+<div id="chart2-container" style="width:100%; max-width:800px; margin:40px auto;">
+    <iframe 
+        src="chart2.html" 
+        style="width:100%; height:500px; border:0; overflow:hidden;" 
+        scrolling="no" 
+        onload="this.style.height=this.contentWindow.document.body.scrollHeight + 'px';">
+    </iframe>
+</div>
+
+<div id="chart3-container" style="width:100%; max-width:800px; margin:40px auto;">
+    <iframe 
+        src="lineoverall.html" 
+        style="width:100%; height:500px; border:0; overflow:hidden;" 
+        scrolling="no" 
+        onload="this.style.height=this.contentWindow.document.body.scrollHeight + 'px';">
+    </iframe>
 </div>
 
 <script>
