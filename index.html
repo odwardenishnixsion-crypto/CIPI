@@ -15,34 +15,34 @@
                             }
         
         body {background-image: url("background.jpg"); background-size: cover; background-attachment: fixed;
-        background-position: center;background-repeat: no-repeat; height: 100vh; margin: 0;
-        font-family: Arial, sans-serif; text-align:center; color:white; width: 100%;}
-        h2 {font-size: 18px; margin-top:20px; color: rgb(247, 245, 247); }
-        .table-wrapper{
-            width:100%;
-            overflow-x:auto;
-            -webkit-overflow-scrolling: touch;
+                    background-position: center;background-repeat: no-repeat; height: 100vh; margin: 0;
+                    font-family: Arial, sans-serif; text-align:center; color:white; width: 100%;}
+                    h2 {font-size: 18px; margin-top:20px; color: rgb(247, 245, 247); }
+                    .table-wrapper{
+                    width:100%;
+                    overflow-x:auto;
+                    -webkit-overflow-scrolling: touch;
                         }
         #priceTable {margin-left: 10px; margin-right: 10px; width:100%; border-collapse: separate; max-width: 100vh;
                     border-spacing: 12px; margin:20px auto; background:rgb(1, 7, 70); color:black;
                     border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.2); font-size: 20px; }
-        th, td { border:0.5px solid #9af7db; padding:8px 12px; cursor:pointer; text-align: center; font-size: 18px; }
-        th { background:#ddd; font-size: 29px; font-weight: bold;}
+                    th, td { border:0.5px solid #9af7db; padding:8px 12px; cursor:pointer; text-align: center; font-size: 18px; }
+                    th { background:#ddd; font-size: 29px; font-weight: bold;}
 
         td{animation: pulseZoom 3s infinite ease-in-out; font-size: 28px;
-            color: white; padding: 12px 25px; text-align: center; font-weight: 600; border-radius: 8px; cursor: pointer;
-            transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(0, 0, 0, 0, 0.2); user-select: none;}
-            td:hover { transform: translateY(-4px); box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); 
+                    color: white; padding: 12px 25px; text-align: center; font-weight: 600; border-radius: 8px; cursor: pointer;
+                    transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(0, 0, 0, 0, 0.2); user-select: none;}
+        td:hover { transform: translateY(-4px); box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); 
                     background: linear-gradient(135deg, #2e59d9, #17a673);}
         td:active{transform: scale(0.95);}
 
 
                                 /* Sticky header row (days) */
-                            #priceTable tr:first-child th {
-                                position: sticky;
-                                top: 0;
-                                background-color: rgb(230, 231, 223);
-                                z-index: 3; /* above everything else */
+        #priceTable tr:first-child th {
+                    position: sticky;
+                    top: 0;
+                    background-color: rgb(230, 231, 223);
+                    z-index: 3; /* above everything else */
                             }
 
                             /* Sticky first column (months) */
@@ -589,7 +589,7 @@ let chart = Highcharts.chart('chartContainer', {
         fontSize: '22px',      // Global popup text size
         fontFamily: 'Poppins, sans-serif'
     },
-    headerFormat: '<div style="font-size: 18px; margin-bottom: 10px; color: #666; border-bottom: 1px solid #ddd; padding-bottom: 5px;">Day {point.key}</div>',
+    headerFormat: '<div style="font-size: 18px; margin-bottom: 10px; color: #666; border-bottom: 1px solid #ddd; padding-bottom: 5px;">{point.date} - {point.key}</div>',
     pointFormat: '<div style="display: flex; justify-content: space-between; align-items: center; min-width: 180px;">' +
                  '<span style="color:{series.color}; font-weight: bold; font-size: 24px;">● {series.name}: </span>' +
                  '<span style="font-weight: 800; font-size: 28px; color: #1207ad; margin-left: 15px;">{point.y:.2f}</span>' +
@@ -616,7 +616,7 @@ let chart = Highcharts.chart('chartContainer', {
             }
         },
         column: {
-            pointWidth: 20   // makes columns wider for phones
+            pointWidth: 18   // makes columns wider for phones
         }
     },
 
@@ -637,7 +637,7 @@ let chart = Highcharts.chart('chartContainer', {
                     labels: { style: { fontSize: '10px' } }
                 },
                 plotOptions: {
-                    column: { pointWidth: 20 } // narrow columns for phones
+                    column: { pointWidth: 16 } // narrow columns for phones
                 }
             }
         },
@@ -653,7 +653,7 @@ let chart = Highcharts.chart('chartContainer', {
                     labels: { style: { fontSize: '20px' } }
                 },
                 plotOptions: {
-                    column: { pointWidth: 20 } // wider columns for desktop
+                    column: { pointWidth: 40 } // wider columns for desktop
                 }
             }
         }
@@ -664,13 +664,20 @@ let chart = Highcharts.chart('chartContainer', {
 function updateChart(month, date){
     const values = priceData[month][date];
     if(!values || values.length !== products.length || values.every(v=>v===0)){
-        alert(`No data for ${month} ${date}`);
+        alert(`No data for${month} ${date}`);
         return;
     }
     document.getElementById('chartContainer').style.display='block';
     chart.update({
         title:{ text:`Price Index - ${month} ${date}th` },
-        series:[{ data: values.map(v => ({ y:v, color: v<=100?'green':v<=140?'orange':'red' })) }]
+        series:[{ 
+    data: values.map((v,i) => ({
+        name: products[i].name,
+        y: v,
+        date: date + " " + month,
+        color: v<=100 ? 'green' : v<=140 ? 'orange' : 'red'
+    }))
+}]
     }, true, true);
     chart.reflow();
 
@@ -731,8 +738,10 @@ table.deleteRow(-1);
 
 </script>
 
-<footer style="text-align: center; padding: 20px; font-size: 22px; color: #faf8f8;" background-color: #000000; margin-top: 40px; margin-bottom: 40px;">
-    Visualization by <a href="mailto:odwardenishnixsion@gmail.com" style="color: #cdfa06; text-decoration: none; font-size: 18px;">Odward Denish Nixsion</a> <br><br>
+<footer style="text-align: center; padding: 20px; font-size: 22px;
+    color: #faf8f8;" background-color: #000000; margin-top: 40px; margin-bottom: 40px;">
+    Visualization by <a href="mailto:odwardenishnixsion@gmail.com" style="color: #cdfa06;
+    text-decoration: none; font-size: 18px;">Odward Denish Nixsion</a> <br><br>
     Data Source: <a href="./03_2026CIPI_JANUARY_2026_EXCEL_TABLES.xlsx" target="_blank" 
     style="color: #ebfc04; text-decoration: none;">CPI 2026 EXCEL TABLE</a>
 
