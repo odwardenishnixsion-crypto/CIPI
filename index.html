@@ -397,7 +397,7 @@ const products = [
     {name:"Timber (Coniferous >6mm)", weight:22.7874}
 ];
 
-// === Price data: enter your own numbers here ===
+// === Price data
 const priceData = {
      JAN:{
         17:[96.76,96.48,98.75,98.67,100.00,103.70,102.50,103.04,96.48,101.40,100.77,100.00,101.18,102.48,102.57],
@@ -577,11 +577,28 @@ let chart = Highcharts.chart('chartContainer', {
         title: { text: 'Price Index' }
     },
 
-    tooltip: {
-        formatter: function() {
-            return `<b>${this.x}</b><br>Index: ${this.y}<br>Weight: ${products[this.point.index].weight}`;
-        }
+  tooltip: {
+    shared: true,
+    useHTML: true, // Crucial for using custom font sizes
+    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+    borderWidth: 2,
+    borderRadius: 10,
+    shadow: true,
+    padding: 15,
+    style: {
+        fontSize: '22px',      // Global popup text size
+        fontFamily: 'Poppins, sans-serif'
     },
+    headerFormat: '<div style="font-size: 18px; margin-bottom: 10px; color: #666; border-bottom: 1px solid #ddd; padding-bottom: 5px;">Day {point.key}</div>',
+    pointFormat: '<div style="display: flex; justify-content: space-between; align-items: center; min-width: 180px;">' +
+                 '<span style="color:{series.color}; font-weight: bold; font-size: 24px;">● {series.name}: </span>' +
+                 '<span style="font-weight: 800; font-size: 28px; color: #1207ad; margin-left: 15px;">{point.y:.2f}</span>' +
+                 '</div>',
+    footerFormat: '',
+    // This makes the "hit area" bigger for mobile fingers
+    snap: 30 
+},
+
 
     plotOptions: {
         series: {
@@ -713,6 +730,11 @@ table.deleteRow(-1);
 table.deleteRow(-1);
 
 </script>
+
+<footer style="text-align: center; padding: 20px; font-size: 22px; color: #faf8f8;" background-color: #000000; margin-top: 40px; margin-bottom: 40px;">
+    Visualization by <a href="mailto:odwardenishnixsion@gmail.com" style="color: #cdfa06; text-decoration: none; font-size: 18px;">Odward Denish Nixsion</a> <br><br>
+    Data Source: <a href="./03_2026CIPI_JANUARY_2026_EXCEL_TABLES.xlsx" target="_blank" 
+    style="color: #ebfc04; text-decoration: none;">CPI 2026 EXCEL TABLE</a>
 
 </body>
 </html>
