@@ -14,6 +14,7 @@
             flex-direction: column;
             align-items: center;
             padding: 20px;
+            min-height: 100vh;
         }
         canvas.line-chart {
             max-width: 900px;
@@ -26,7 +27,10 @@
 </head>
 <body class="overall-index">
     <h2 class="line-chart-heading">OVERALL CONSTRUCTION INDEX(Days 17–26 for Each Month)</h2>
+    
+    <div class="chart-container" style="position: relative; height: 50vh; width: 90vw;">
     <canvas id="lineChart"></canvas>
+</div>
 
     <script>
         const months = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
@@ -71,8 +75,10 @@
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: false, // This is key for mobile height
                 plugins: {
                     legend: {
+                        display: true,
                         position: 'bottom',
                         labels: { color: 'white' }
                     },
