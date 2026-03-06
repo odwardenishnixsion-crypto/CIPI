@@ -75,6 +75,19 @@
         td:hover{transform: scale(1.1); box-shadow: 0 6px 12px rgba(0, 0, 0, 0, 0.3);}
 
         iframe {width: 100%; height: 100vh; margin-bottom: 10px; border: none; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.2);}
+       /* Chart 3 container */
+#chart3-container {
+    width: 95%;
+    margin: 20px auto;
+}
+
+/* Chart 3 iframe */
+#chart3-container iframe {
+    width: 100%;
+    min-height: 500px;       /* for mobile */
+    max-height: 1200px;      /* prevents excessive stretching on desktop */
+    border: none;
+}
 
 /* Make iframe containers responsive */
 #chart2-container,
