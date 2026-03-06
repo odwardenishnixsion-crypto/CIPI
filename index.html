@@ -8,14 +8,22 @@
     <script src="highcharts.js"></script>
     <style>
 
-        *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; max-width: 100%;}
+       *, *::before, *::after {
+                    box-sizing: border-box;
+                    margin: 0;
+                    padding: 0;
+                            }
         
         body {background-image: url("background.jpg"); background-size: cover; background-attachment: fixed;
         background-position: center;background-repeat: no-repeat; height: 100vh; margin: 0;
         font-family: Arial, sans-serif; text-align:center; color:white; width: 100%;}
         h2 {font-size: 18px; margin-top:20px; color: rgb(44, 4, 44); }
-        .table-wrapper{width: 100%; overflow-x: auto; margin-top: 0;}
-        #priceTable {margin-left: 10px; margin-right: 10px; width:100%; border-collapse: separate;
+        .table-wrapper{
+            width:100%;
+            overflow-x:auto;
+            -webkit-overflow-scrolling: touch;
+                        }
+        #priceTable {margin-left: 10px; margin-right: 10px; width:100%; border-collapse: separate; max-width: 100vh;
                     border-spacing: 12px; margin:20px auto; background:rgb(1, 7, 70); color:black;
                     border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.2); font-size: 20px; }
         th, td { border:0.5px solid #9af7db; padding:8px 12px; cursor:pointer; text-align: center; font-size: 18px; }
@@ -27,7 +35,32 @@
             td:hover { transform: translateY(-4px); box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); 
                     background: linear-gradient(135deg, #2e59d9, #17a673);}
         td:active{transform: scale(0.95);}
-        #chartContainer { width:100%; align-content: center; height:500px; margin:0 auto;
+
+        
+                                /* Sticky header row (days) */
+                            #priceTable tr:first-child th {
+                                position: sticky;
+                                top: 0;
+                                background-color: rgb(230, 231, 223);
+                                z-index: 3; /* above everything else */
+                            }
+
+                            /* Sticky first column (months) */
+                            #priceTable th:first-child,
+                            #priceTable td:first-child {
+                                position: sticky;
+                                left: 0;
+                                background-color: rgb(248, 248, 243);
+                                z-index: 2; /* below header row but above other cells */
+                            }
+
+                            /* Optional: corner cell (top-left) */
+                            #priceTable tr:first-child th:first-child {
+                                z-index: 4; /* top-left corner above everything */
+                            }
+
+        #chartContainer { width:100%; align-content: center; height:60vh;
+                        min-height:350px; margin:0 auto;
                         display:none; background:white; border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.2); }
     
             .infor{color: #ffffff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 18px; text-align: center;
@@ -46,22 +79,16 @@
 /* Make iframe containers responsive */
 #chart2-container,
 #chart3-container {
-    width: 96%;             /* Full width of parent */
-    margin: 30px auto;       /* Center horizontally with space above/below */
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3); /* Optional: subtle shadow */
-    border-radius: 20px;     /* Rounded corners */
-    overflow: hidden;        /* Hide scrollbars */
+    width:95%;
+    margin:20px auto;
 }
 
-#chart3-container{margin-bottom: 8px;}
-
-/* Make iframes inside responsive containers fill their parent */
 #chart2-container iframe,
 #chart3-container iframe {
-    width: 100%;
-    height: 100%;
-    min-height: 400px;       /* Minimum height for mobile */
-    border: 0;               /* Remove borders */
+    width:100%;
+    height:60vh;
+    min-height:350px;
+    border:none;
 }
 
 /* Optional: adjust height for smaller screens */
@@ -69,6 +96,51 @@
     #chart2-container iframe,
     #chart3-container iframe {
         min-height: 300px;   /* Slightly smaller for phones */
+    }
+}
+
+
+/* Responsive adjustment for larger screens */
+@media screen and (min-width: 1024px) {
+    #chartContainer {
+        height: 70vh;          /* taller chart on large screens */
+        min-height: 500px;
+    }
+}
+
+@media screen and (max-width:600px){
+
+#chartContainer{
+height:420px;
+}
+
+th{
+font-size:18px;
+}
+
+td{
+font-size:18px;
+padding:10px;
+}
+
+}
+
+
+/* First chart container */
+#chartContainer {
+    width: 95%;           /* almost full width */
+    max-width: auto;    /* prevent stretching too much on desktop */
+    height: 600px;        /* larger chart on desktop */
+    margin: 20px auto;    /* center horizontally */
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+/* Mobile adjustments */
+@media screen and (max-width: 600px) {
+    #chartContainer {
+        height: 500px;    /* larger chart for phones */
     }
 }
 
@@ -268,7 +340,7 @@
 <div id="chartContainer"></div>
 
 <!-- Second Chart div -->
-<div id="chart2-container"">
+<div id="chart2-container">
     <iframe 
         src="chart2.html" 
         style="width:100%; height:500px; border:0; overflow:hidden;" 
@@ -277,6 +349,7 @@
     </iframe>
 </div>
 
+<!-- Third Chart div -->
 <div id="chart3-container">
     <iframe 
         src="lineoverall.html" 
@@ -469,12 +542,89 @@ const priceData = {
 let chart = Highcharts.chart('chartContainer', {
     chart: { type: 'column' },
     title: { text: 'Hover over a cell to view Price Index' },
-    xAxis: { categories: products.map(p=>p.name), labels:{ rotation:-45 } },
-    yAxis: { min:0, title:{ text:'Price Index' } },
-    tooltip: { formatter: function(){ return `<b>${this.x}</b><br>Index: ${this.y}<br>Weight: ${products[this.point.index].weight}`; } },
-    series:[{ name:'Price Index', data: Array(products.length).fill(0) }]
-});
+    
+    xAxis: {
+        categories: products.map(p => p.name),
+        labels: {
+            rotation: -45,
+            style: { fontSize: '14px' }
+        }
+    },
 
+    yAxis: {
+        min: 0,
+        startOnTick: true,
+        endOnTick: true,
+        tickAmount: 6,
+        title: { text: 'Price Index' }
+    },
+
+    tooltip: {
+        formatter: function() {
+            return `<b>${this.x}</b><br>Index: ${this.y}<br>Weight: ${products[this.point.index].weight}`;
+        }
+    },
+
+    plotOptions: {
+        series: {
+            stickyTracking: false,
+            enableMouseTracking: true,
+            pointPadding: 0.15,
+            groupPadding: 0.1,
+            borderWidth: 0,
+            point: {
+                events: {
+                    click: function() {
+                        this.series.chart.tooltip.refresh(this);
+                    }
+                }
+            }
+        },
+        column: {
+            pointWidth: 20   // makes columns wider for phones
+        }
+    },
+
+    series: [{ name: 'Price Index', data: Array(products.length).fill(0) }],
+
+    // === Responsive rules for phones ===
+   responsive: {
+    rules: [
+        // === Phones ===
+        {
+            condition: { maxWidth: 600 },
+            chartOptions: {
+                chart: { height: 350 },
+                xAxis: {
+                    labels: { style: { fontSize: '10px' }, rotation: -45 }
+                },
+                yAxis: {
+                    labels: { style: { fontSize: '10px' } }
+                },
+                plotOptions: {
+                    column: { pointWidth: 20 } // narrow columns for phones
+                }
+            }
+        },
+        // === Desktop ===
+        {
+            condition: { minWidth: 601 },
+            chartOptions: {
+                chart: { height: 500 }, // taller chart for desktop
+                xAxis: {
+                    labels: { style: { fontSize: '20px' }, rotation: -45 }
+                },
+                yAxis: {
+                    labels: { style: { fontSize: '20px' } }
+                },
+                plotOptions: {
+                    column: { pointWidth: 60 } // wider columns for desktop
+                }
+            }
+        }
+    ]
+}
+});
 // === Update chart on hover ===
 function updateChart(month, date){
     const values = priceData[month][date];
