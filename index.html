@@ -27,9 +27,9 @@
                     border-spacing: 12px; margin:20px auto; background:rgb(1, 7, 70); color:black;
                     border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.2); font-size: 20px; }
                     th, td { border:0.5px solid #9af7db; padding:8px 12px; cursor:pointer; text-align: center; font-size: 18px; }
-                    th { background:#ddd; font-size: 29px; font-weight: bold;}
+                    th { background:#ddd; font-size: 29px; font-weight: bold; font-family: 'Times New Roman';}
 
-        td{animation: pulseZoom 3s infinite ease-in-out; font-size: 28px;
+        td{animation: pulseZoom 3s infinite ease-in-out; font-size: 28px; font-family: 'Times New Roman';
                     color: white; padding: 12px 25px; text-align: center; font-weight: 600; border-radius: 8px; cursor: pointer;
                     transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(0, 0, 0, 0, 0.2); user-select: none;}
         td:hover { transform: translateY(-4px); box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); 
@@ -79,6 +79,8 @@
 #chart3-container {
     width: 95%;
     margin: 20px auto;
+    margin-bottom: 0;
+    margin-top: 0;
 }
 
 /* Chart 3 iframe */
@@ -87,6 +89,8 @@
     min-height: auto;
     max-height: 1200px;      /* prevents excessive stretching on desktop */
     border: none;
+    margin-bottom: 0;
+    margin-top: 0;
 }
 
 /* Make iframe containers responsive */
@@ -167,7 +171,7 @@ padding:10px;
 </head>
 <body>
 
-<h1 style="font-size: 26px; text-align: center; color:#fffdff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+<h1 style="font-size: 26px; text-align: center; color:#fffdff; font-family: times New Roman;">
     Overall Construction Input Price Index Base Period 2016/2017</h1>
 <p Class="infor" style="font-size: 20px;">Click on <strong>Check</strong> buttons of each dates and it's corresponding <br>month bellow to view the corresponding Price Index</p>
 <div class="table-wrapper">
@@ -377,6 +381,15 @@ padding:10px;
     </iframe>
 </div>
 
+<div id="chart4-container">
+    <iframe 
+        src="topproductweight.html" 
+        style="width:98%; height:auto; border:0; overflow:hidden;" 
+        scrolling="no" 
+        onload="this.style.height=this.contentWindow.document.body.scrollHeight + 'px';">
+    </iframe>
+</div>
+
 <script>
 // === Products & Weights ===
 const products = [
@@ -565,7 +578,7 @@ let chart = Highcharts.chart('chartContainer', {
         categories: products.map(p => p.name),
         labels: {
             rotation: -45,
-            style: { fontSize: '14px' }
+            style: { fontSize: '13px', fontFamily: 'Times New Roman' }
         }
     },
 
@@ -574,20 +587,20 @@ let chart = Highcharts.chart('chartContainer', {
         startOnTick: true,
         endOnTick: true,
         tickAmount: 6,
-        title: { text: 'Price Index' }
+        title: { text: 'Price Index', style: { fontFamily: 'Times New Roman' , fontSize: '13px'} }
     },
 
   tooltip: {
     shared: true,
     useHTML: true, // Crucial for using custom font sizes
-    backgroundColor: 'rgba(255, 255, 255, 0.95)',
-    borderWidth: 2,
+    backgroundColor: 'transparent gray', // Semi-transparent background for better readability
+    borderWidth: 1,
     borderRadius: 10,
     shadow: true,
     padding: 15,
     style: {
-        fontSize: '22px',      // Global popup text size
-        fontFamily: 'Poppins, sans-serif'
+        fontSize: '13px',      // Global popup text size
+        fontFamily: 'Times New Roman', textColor: 'yellow' // Global popup text color
     },
     headerFormat: '<div style="font-size: 18px; margin-bottom: 10px; color: #666; border-bottom: 1px solid #ddd; padding-bottom: 5px;">{point.date} - {point.key}</div>',
     pointFormat: '<div style="display: flex; justify-content: space-between; align-items: center; min-width: 180px;">' +
