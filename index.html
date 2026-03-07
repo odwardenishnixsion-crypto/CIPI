@@ -751,12 +751,108 @@ table.deleteRow(-1);
 
 </script>
 
-<footer style="text-align: center; padding: 20px; font-size: 22px;
-    color: #faf8f8;" background-color: #000000; margin-top: 40px; margin-bottom: 40px;">
-    Visualization by <a href="mailto:odwardenishnixsion@gmail.com" style="color: #cdfa06;
-    text-decoration: none; font-size: 18px;">Odward Denish Nixsion</a> <br><br>
-    Data Source: <a href="./03_2026CIPI_JANUARY_2026_EXCEL_TABLES.xlsx" target="_blank" 
-    style="color: #ebfc04; text-decoration: none;">CPI 2026 EXCEL TABLE</a>
+<footer class="modern-footer">
+    <div class="footer-glass-content">
+        <!-- Top Section: Data Context -->
+        <div class="footer-main-info">
+            <div class="source-tag">
+                <span class="icon">📊</span>
+                <div>
+                    <strong>Data Source:</strong> Uganda Bureau of Statistics (UBOS)
+                    <p class="sub-text">Overall Construction Input Price Index (Base 2016/17 = 100)</p>
+                </div>
+            </div>
+            
+            <div class="period-box">
+                <span class="label">Analysis Period</span>
+                <span class="value">Jan 2016 – Jan 2017</span>
+            </div>
+        </div>
+
+        <div class="footer-separator"></div>
+
+        <!-- Middle Section: Authorship -->
+        <div class="author-credits">
+            <div class="viz-by">Visualization By: ODWAR DENISH NIXSION</div>
+    
+        </div>
+
+        <!-- Bottom Section: Pulse & Small Print -->
+        <div class="footer-bottom">
+            <div class="live-status">
+                <div class="pulse-icon"></div> Live Analytics System
+            </div>
+            <div class="copyright">&copy; 2026 Research Insight. All rights reserved.</div>
+        </div>
+    </div>
+</footer>
+
+<style>
+.modern-footer {
+    padding: 60px 20px 30px;
+    background: #00040a;
+    font-family: 'times new roman';
+    color: #faf9f9;
+}
+
+.footer-glass-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(212, 160, 23, 0.1);
+    border-radius: 24px;
+    padding: 40px;
+    backdrop-filter: blur(10px);
+}
+
+.footer-main-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.source-tag { display: flex; align-items: center; gap: 15px; }
+.source-tag .icon { font-size: 24px; }
+.sub-text { font-size: 13px; color: #8892b0; margin: 4px 0 0; }
+
+.period-box {
+    background: rgba(212, 160, 23, 0.1);
+    padding: 10px 20px;
+    border-radius: 12px;
+    border-left: 3px solid #d4a017;
+}
+
+.period-box .label { display: block; font-size: 13px; text-transform: uppercase; color: #fdf902; letter-spacing: 1px; }
+
+.footer-separator { height: 1px; background: linear-gradient(90deg, transparent, rgba(212, 160, 23, 0.2), transparent); margin: 30px 0; }
+
+.author-credits { text-align: center; }
+.viz-by { font-size: 16px; color: #f2f3f8; text-transform: uppercase; margin-bottom: 8px; }
+.names { font-size: 18px; font-weight: 600; color: #d4a017; }
+.dot { height: 8px; width: 8px; background: #d4a017; display: inline-block; border-radius: 50%; margin: 0 10px; vertical-align: middle; }
+
+.social-tags { display: flex; justify-content: center; gap: 12px; margin-top: 15px; }
+.tag { font-size: 13px; color: #fff; text-decoration: none; padding: 5px 15px; border-radius: 50px; background: rgba(255,255,255,0.05); transition: 0.3s; }
+.tag:hover { background: #d4a017; color: #0b1c3d; }
+
+.footer-bottom { display: flex; justify-content: space-between; margin-top: 40px; font-size: 12px; color: #8892b0; }
+
+.pulse-icon { width: 10px; height: 10px; background: #fffb02; border-radius: 50%; display: inline-block; margin-right: 8px; box-shadow: 0 0 0 rgba(212, 160, 23, 0.4); animation: pulse 2s infinite; }
+
+@keyframes pulse { 
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(212, 160, 23, 0.7); }
+    70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(212, 160, 23, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(212, 160, 23, 0); }
+}
+
+@media (max-width: 768px) {
+    .footer-main-info { flex-direction: column; text-align: center; }
+    .footer-bottom { flex-direction: column; align-items: center; gap: 10px; }
+}
+</style>
+
 
 </body>
 </html>
