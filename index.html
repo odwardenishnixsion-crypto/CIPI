@@ -765,7 +765,7 @@ const priceData = {
 
 // === Initialize Highcharts ===
 let chart = Highcharts.chart('chartContainer', {
-    chart: { type: 'column' },
+    chart: { type: 'column', backgroundColor: 'transparent' },
     title: { text: 'Hover over a cell to view Price Index', fontFamily: 'Times New Roman', fontSize: '16px' },
     
     xAxis: {
@@ -1046,7 +1046,7 @@ table.deleteRow(-1);
 
 @keyframes pulse { 
     0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(212, 160, 23, 0.7); }
-    70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(212, 160, 23, 0); }
+    70% { transform: scale(1.2); box-shadow: 0 0 0 10px rgba(212, 160, 23, 0); }
     100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(212, 160, 23, 0); }
 }
 
