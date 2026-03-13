@@ -327,6 +327,37 @@ padding:10px;
         .stat-card { width: 100%; min-width: unset; }
         .mobile-hide { display: none; }
     }
+
+
+    /* Rolling footer. The container that stays at the bottom of the screen */
+  .fixed-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #010100; /* Dark background */
+    color: rgb(255, 255, 0);
+    padding: 20px 0;
+    overflow: hidden; /* Hides text that goes outside the bar */
+    white-space: nowrap; /* Keeps text in one long line */
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    z-index: 1000; /* Ensures it stays above other content */
+  }
+
+  /* The actual rolling text animation */
+  .rolling-text {
+    display: inline-block;
+    padding-left: 100%; /* Starts the text off-screen to the right */
+    animation: roll-left 35s linear infinite; /* 15 seconds per loop */
+  }
+
+  /* Animation logic: moves text from right to left */
+  @keyframes roll-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+  }
+
 </style>
 <div class="table-wrapper">
 <table id="priceTable">
@@ -949,6 +980,15 @@ table.deleteRow(-1);
         </div>
     </div>
 </footer>
+
+ <div class="fixed-footer">
+    <div class="rolling-text">
+      Visualization by ODWAR DENISH NIXSION &nbsp;&nbsp;&nbsp; 
+      Tel: +256 785557307 Email: odwardenishnixsion@gmail.com. &nbsp;&nbsp;&nbsp; 
+      Construction Input Price Index for the Period Jan 2016 – Jan 2017 all rights reserved at Research Insight 2026.
+    </div>
+  </div>
+
 
 <style>
 .modern-footer {
