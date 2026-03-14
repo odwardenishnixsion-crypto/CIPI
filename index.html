@@ -358,6 +358,20 @@ padding:10px;
     100% { transform: translateX(-100%); }
   }
 
+/*my background video*/
+.background-video {
+  position: fixed; /* Use 'absolute' if only for a specific section */
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -100; /* Keeps it behind all other content */
+  object-fit: cover; /* Ensures it fills the screen without stretching */
+}
+
+
 </style>
 <div class="table-wrapper">
 <table id="priceTable">
@@ -583,6 +597,13 @@ padding:10px;
         onload="this.style.height=this.contentWindow.document.body.scrollHeight + 'px';">
     </iframe>
 </div>
+
+<video autoplay muted loop playsinline poster="fallback-image.jpg" id="myBgVideo" class="background-video">
+  <source src="fronix.mp4" type="video/mp4">
+  <source src="your-video.webm" type="video/webm">
+  Your browser does not support HTML5 video.
+</video>
+
 
 <script>
 // === Products & Weights ===
@@ -942,6 +963,11 @@ window.addEventListener('resize', resizeChart3Iframe);
 table.deleteRow(-1);
 table.deleteRow(-1);
 table.deleteRow(-1);
+
+
+//video script
+  var video = document.getElementById("myBgVideo");
+  video.playbackRate = 0.6; // Change this number to adjust speed (e.g., 0.25, 0.75)
 
 </script>
 
